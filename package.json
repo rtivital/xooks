@@ -1,0 +1,43 @@
+{
+  "name": "xooks",
+  "version": "1.0.0",
+  "description": "General purpose react hooks",
+  "main": "dist/lib.js",
+  "repository": "https://github.com/rtivital/xooks",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "size": "npm run build && bundlesize"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/lib.js",
+      "threshold": "3 Kb"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@rtivital/eslint-config": "1.0.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "bundlesize": "^0.18.0",
+    "eslint": "^7.8.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "react": "^16.13.1",
+    "terser-webpack-plugin": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "nanoid": "^3.1.12"
+  }
+}
