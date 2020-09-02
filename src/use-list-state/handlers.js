@@ -7,7 +7,7 @@ export function prepend(current, ...items) {
 }
 
 export function insert(current, index, ...items) {
-  return [...current.slice(0, index), ...items, ...current.slice(index + 1)];
+  return [...current.slice(0, index), ...items, ...current.slice(index)];
 }
 
 export function apply(current, fn) {
@@ -15,13 +15,7 @@ export function apply(current, fn) {
 }
 
 export function remove(current, ...indexes) {
-  const cloned = [...current];
-
-  for (let i = 0; i < indexes.length; i += 1) {
-    cloned.splice(indexes[i], 1);
-  }
-
-  return cloned;
+  return current.filter((_, index) => !indexes.includes(index));
 }
 
 export function reorder(current, { from, to }) {
