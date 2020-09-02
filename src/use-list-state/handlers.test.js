@@ -77,4 +77,8 @@ describe('use-list-state handlers', () => {
       { a: 3 },
     ]);
   });
+
+  test('apply: applies provided function to list of elements', () => {
+    expect(handlers.apply([1, 2, 3], (item, index) => item * index)).toEqual([0, 2, 6]);
+  });
 });

@@ -39,3 +39,21 @@ export function setItemProp(current, index, prop, value) {
   cloned[index] = { ...cloned[index], [prop]: value };
   return cloned;
 }
+
+function bindHandler(handler, setState) {
+  return (...args) => setState(current => handler(current, ...args));
+}
+
+export function bindHandlers(setState) {
+  return {
+    setState,
+    append: bindHandler(append, setState),
+    prepend: bindHandler(prepend, setState),
+    insert: bindHandler(insert, setState),
+    apply: bindHandler(apply, setState),
+    remove: bindHandler(remove, setState),
+    reorder: bindHandler(reorder, setState),
+    setItem: bindHandler(setItem, setState),
+    setItemProp: bindHandler(setItemProp, setState),
+  };
+}
