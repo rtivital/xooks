@@ -18,6 +18,7 @@ yarn add xooks
 
 - [use-document-title](#use-document-title)
 - [use-clipboard](#use-clipboard)
+- [use-click-outside](#use-click-outside)
 
 ### use-document-title
 
@@ -41,11 +42,11 @@ Provides interface to work with `navigator.clipboard`. Includes copied state tim
 
 **Usage:**
 
-```jsx
+```js
 import React from 'react';
 import { useClipboard } from 'xooks';
 
-export default function Clupboard() {
+export default function Clipboard() {
   const {
     copied, // indicates that value was recently copied to clipboard
     copy, // copy any string to clipboard
@@ -58,5 +59,22 @@ export default function Clupboard() {
       {clipboard.copied ? 'Copied' : 'Copy Hello'}
     </button>
   );
+}
+```
+
+### use-click-outside
+
+Handle outside clicks and touches for provided ref.
+
+**Usage:**
+
+```js
+import React, { useRef } from 'react';
+import { useClickOutside } from 'xooks';
+
+export default function ClickOutside() {
+  const ref = useRef();
+  useClickOutside(ref, () => console.log('Clicked outside'));
+  return <div ref={ref}>Click outside</div>;
 }
 ```

@@ -1,8 +1,9 @@
 import { useLayoutEffect } from 'react';
+import isBrowser from '../is-browser';
 
 export default function useDocumentTitle(title) {
   useLayoutEffect(() => {
-    if (typeof document !== 'undefined') {
+    if (isBrowser()) {
       document.title = title;
     }
   }, [title]);
