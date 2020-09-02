@@ -55,4 +55,26 @@ describe('use-list-state handlers', () => {
     expect(handlers.remove([1, 2, 3, 4, 5], 3, 0)).toEqual([2, 3, 5]);
     expect(handlers.remove([1, 2, 3, 4, 5], 0, 1, 2, 3, 4)).toEqual([]);
   });
+
+  test('reorder: reorders items at given positions in the list', () => {
+    expect(handlers.reorder([1, 2, 3], { from: 0, to: 2 })).toEqual([2, 3, 1]);
+  });
+
+  test('setItem: sets item at given position of the list', () => {
+    expect(handlers.setItem([1, 2, 3], 1, 'x')).toEqual([1, 'x', 3]);
+  });
+
+  test('setItemProp: sets item prop at given position of the list', () => {
+    expect(handlers.setItemProp([{ a: 1 }, { a: 2 }, { a: 3 }], 1, 'a', 'x')).toEqual([
+      { a: 1 },
+      { a: 'x' },
+      { a: 3 },
+    ]);
+
+    expect(handlers.setItemProp([{ a: 1 }, { a: 2 }, { a: 3 }], 1, 'b', 'x')).toEqual([
+      { a: 1 },
+      { a: 2, b: 'x' },
+      { a: 3 },
+    ]);
+  });
 });
