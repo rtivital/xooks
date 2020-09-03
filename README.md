@@ -21,6 +21,7 @@ yarn add xooks
 - [use-click-outside](#use-click-outside)
 - [use-id](#use-id)
 - [use-list-state](#use-list-state)
+- [use-intermediate-value](#use-intermediate-value)
 
 ### use-document-title
 
@@ -148,5 +149,43 @@ export default function UseListState() {
 
   // set item property at given position
   const setItemProp = () => handlers.setItemProp(1, 'a', 'new-prop'); // values -> [{ a: 8 }, { a: 'new-prop' }]
+}
+```
+
+### use-intermediate-value
+
+Provides interface to work with free user input that should be validated before applying.
+
+**Usage:**
+
+```js
+// example with number input
+// full example – https://github.com/rtivital/omatsuri/blob/master/src/components/NumberInput/NumberInput.jsx
+import React, { useState } from 'react';
+import { useIntermediateValue } from 'xooks';
+
+export default function UseIntermediateValue() {
+  const [value, onChange] = useState(0); // actual value is stored separately
+  const min = 0;
+  const max = 100;
+
+  const { intermediateValue, valid, handleChange, handleSubmit } = useIntermediateValue({
+    value,
+    onChange, // onChange will be called only if rule indicates that value is valid
+    rule: val => !Number.isNaN(val) && val <= max && val >= min, // validation function
+    format: val => Number(val), // format value before submitting to outer state
+  });
+
+  return (
+    <Input
+      {...others}
+      invalid={!valid}
+      type="text"
+      value={intermediateValue}
+      // value changes as usual until its valid, when value gets invalid intermediateValue is used instead
+      onChange={event => handleChange(event.target.value)}
+      // handleSubmit sets intermediateValue to last valid value
+      onBlur={event => handleSubmit(event.target.value)}
+    />
 }
 ```
