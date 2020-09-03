@@ -21,6 +21,7 @@ yarn add xooks
 - [use-click-outside](#use-click-outside)
 - [use-id](#use-id)
 - [use-list-state](#use-list-state)
+- [use-local-storage](#use-local-storage)
 - [use-intermediate-value](#use-intermediate-value)
 
 ### use-document-title
@@ -149,6 +150,39 @@ export default function UseListState() {
 
   // set item property at given position
   const setItemProp = () => handlers.setItemProp(1, 'a', 'new-prop'); // values -> [{ a: 8 }, { a: 'new-prop' }]
+}
+```
+
+### use-local-storage
+
+Provides insterface to work with local storage. Automatically calls `JSON.stringify` on provided data before saving. Includes delayed updates for perfomance improvements.
+
+**Usage:**
+
+```js
+import React, { useState, useEffect } from 'react';
+import { useLocalStorage } from 'xooks';
+
+export default function UseLocalStorage() {
+  const ls = useLocalStorage({
+    key: 'data-key', // local storage key that should be used to store data
+    delay: 1000, // rate in ms by which data can be updated
+  });
+
+  // properties of ls:
+  // ls.saved – boolean – indicates that values is up to date
+  // ls.save(values) – saves provided values as string to localStorage
+  // ls.clean() – removes saved value
+  // ls.retrieve() – gets value from localStorage
+  // ls.retrieveAndClean() – get value from localStorage and then removes it
+
+  const [values, setValues] = useState(ls.retrieve() || [{ some: 'values' }]);
+
+  useEffect(() => {
+    ls.save(values); // calls localStorage.setItem('data-key', JSON.stringify(values)) max one time every 1000ms
+  }, [values]);
+
+  return <JsonEditor value={values} onChange={setValues} />;
 }
 ```
 
