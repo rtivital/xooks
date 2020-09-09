@@ -22,6 +22,7 @@ yarn add xooks
 - [use-id](#use-id)
 - [use-list-state](#use-list-state)
 - [use-local-storage](#use-local-storage)
+- [use-form](#use-form)
 - [use-intermediate-value](#use-intermediate-value)
 
 ### use-document-title
@@ -183,6 +184,47 @@ export default function UseLocalStorage() {
   }, [values]);
 
   return <JsonEditor value={values} onChange={setValues} />;
+}
+```
+
+### use-form
+
+Provides most basic form state management utilities.
+
+**Usage:**
+
+```js
+import React from 'react';
+import { useForm } from 'xooks';
+
+export default function UseForm() {
+  const form = useForm({
+    initialValues: { name: '', email: '' },
+    validationRules: {
+      name: value => value.trim().length > 0,
+      email: value => /@.*?\./.test(value),
+    },
+  });
+
+  return (
+    <form onSubmit={form.onSubmit(validValues => console.log(validValues))}>
+      <input
+        type="text"
+        placeholder={form.errors.name ? 'Name is invalid' : 'Enter name'}
+        value={form.values.name}
+        onChange={event => form.setField('name', event.target.value)}
+        onFocus={() => form.invalidateField('name')}
+      />
+
+      <input
+        type="text"
+        placeholder={form.errors.email ? 'Email is invalid' : 'Enter email'}
+        value={form.values.email}
+        onChange={event => form.setField('email', event.target.value)}
+        onFocus={() => form.invalidateField('email')}
+      />
+    </form>
+  );
 }
 ```
 

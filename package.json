@@ -1,6 +1,6 @@
 {
   "name": "xooks",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "General purpose react hooks",
   "main": "dist/lib.js",
   "repository": "https://github.com/rtivital/xooks",
