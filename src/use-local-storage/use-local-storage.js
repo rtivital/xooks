@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function useLocalStorage({ key, delay }) {
   const [saved, setSaved] = useState(true);
-  const [saveTimeout, setSaveTimeout] = useState(null);
+  const timeoutRef = useRef(null);
 
-  const save = values => {
-    global.clearTimeout(saveTimeout);
+  const cancel = () => {
+    global.clearTimeout(timeoutRef.current);
+  };
 
-    const timeout = setTimeout(() => {
+  const save = (values) => {
+    cancel();
+    timeoutRef.current = setTimeout(() => {
       try {
         global.localStorage.setItem(key, JSON.stringify(values));
         setSaved(true);
@@ -15,12 +18,10 @@ export default function useLocalStorage({ key, delay }) {
         setSaved(false);
       }
     }, delay);
-
-    setSaveTimeout(timeout);
   };
 
   const clean = () => {
-    global.clearTimeout(saveTimeout);
+    cancel();
     localStorage.removeItem(key);
   };
 
@@ -38,5 +39,5 @@ export default function useLocalStorage({ key, delay }) {
     return value;
   };
 
-  return { saved, save, clean, retrieveAndClean, retrieve };
+  return { saved, save, clean, cancel, retrieveAndClean, retrieve };
 }

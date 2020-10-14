@@ -176,11 +176,13 @@ export default function UseLocalStorage() {
   // ls.clean() – removes saved value
   // ls.retrieve() – gets value from localStorage
   // ls.retrieveAndClean() – get value from localStorage and then removes it
+  // ls.cancel() – cancel save timeout after component unmount
 
   const [values, setValues] = useState(ls.retrieve() || [{ some: 'values' }]);
 
   useEffect(() => {
     ls.save(values); // calls localStorage.setItem('data-key', JSON.stringify(values)) max one time every 1000ms
+    return ls.cancel;
   }, [values]);
 
   return <JsonEditor value={values} onChange={setValues} />;
@@ -201,18 +203,18 @@ export default function UseForm() {
   const form = useForm({
     initialValues: { name: '', email: '' },
     validationRules: {
-      name: value => value.trim().length > 0,
-      email: value => /@.*?\./.test(value),
+      name: (value) => value.trim().length > 0,
+      email: (value) => /@.*?\./.test(value),
     },
   });
 
   return (
-    <form onSubmit={form.onSubmit(validValues => console.log(validValues))}>
+    <form onSubmit={form.onSubmit((validValues) => console.log(validValues))}>
       <input
         type="text"
         placeholder={form.errors.name ? 'Name is invalid' : 'Enter name'}
         value={form.values.name}
-        onChange={event => form.setField('name', event.target.value)}
+        onChange={(event) => form.setField('name', event.target.value)}
         onFocus={() => form.invalidateField('name')}
       />
 
@@ -220,7 +222,7 @@ export default function UseForm() {
         type="text"
         placeholder={form.errors.email ? 'Email is invalid' : 'Enter email'}
         value={form.values.email}
-        onChange={event => form.setField('email', event.target.value)}
+        onChange={(event) => form.setField('email', event.target.value)}
         onFocus={() => form.invalidateField('email')}
       />
     </form>
