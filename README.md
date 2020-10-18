@@ -2,6 +2,8 @@
 
 General purpose react hooks collection
 
+[![npm version](https://badge.fury.io/js/xooks.svg)](https://www.npmjs.com/package/xooks)
+
 ## Installation
 
 xooks library has react@>=16.8.0 as peer dependency and [nanoid](https://www.npmjs.com/package/nanoid) as dependency.
