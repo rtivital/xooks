@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-type Partial<T> = {
+type ValidationRule<T> = {
   readonly [P in keyof T]?: (value: T[P]) => boolean;
 };
 
@@ -8,7 +8,7 @@ export default function useForm<T extends { [key: string]: any }>({
   initialValues,
   validationRules = {},
 }: {
-  validationRules?: Partial<T>;
+  validationRules?: ValidationRule<T>;
   initialValues: T;
 }) {
   const initialErrors =
