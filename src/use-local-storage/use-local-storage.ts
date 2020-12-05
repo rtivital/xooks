@@ -1,18 +1,18 @@
 import { useState, useRef } from 'react';
 
-export default function useLocalStorage({ key, delay }) {
+export default function useLocalStorage<T = any>({ key, delay }: { key: string; delay: number }) {
   const [saved, setSaved] = useState(true);
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<number>();
 
   const cancel = () => {
-    global.clearTimeout(timeoutRef.current);
+    clearTimeout(timeoutRef.current);
   };
 
-  const save = (values) => {
+  const save = (values: any) => {
     cancel();
     timeoutRef.current = setTimeout(() => {
       try {
-        global.localStorage.setItem(key, JSON.stringify(values));
+        localStorage.setItem(key, JSON.stringify(values));
         setSaved(true);
       } catch (e) {
         setSaved(false);
@@ -25,15 +25,15 @@ export default function useLocalStorage({ key, delay }) {
     localStorage.removeItem(key);
   };
 
-  const retrieve = () => {
+  const retrieve = (): T => {
     try {
-      return JSON.parse(global.localStorage.getItem(key));
+      return JSON.parse(localStorage.getItem(key));
     } catch (e) {
       return null;
     }
   };
 
-  const retrieveAndClean = () => {
+  const retrieveAndClean = (): T => {
     const value = retrieve();
     clean();
     return value;
