@@ -4,7 +4,7 @@ type Partial<T> = {
   readonly [P in keyof T]?: (value: T[P]) => boolean;
 };
 
-export default function useForm<T>({
+export default function useForm<T extends { [key: string]: any }>({
   initialValues,
   validationRules = {},
 }: {
@@ -44,11 +44,11 @@ export default function useForm<T>({
     values,
     errors,
     validate,
-    setField: (field: keyof T, value) =>
+    setField: <K extends keyof T, U extends T[K]>(field: K, value: U) =>
       setValues((currentValues) => ({ ...currentValues, [field]: value })),
-    invalidateField: (field) =>
+    invalidateField: (field: keyof T) =>
       setErrors((currentErrors) => ({ ...currentErrors, [field]: false })),
-    onSubmit: (onSubmit) => (event: React.FormEvent) => {
+    onSubmit: (onSubmit: (values: T) => any) => (event: React.FormEvent) => {
       event.preventDefault();
       validate() && onSubmit(values);
     },
