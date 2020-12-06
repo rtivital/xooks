@@ -43,6 +43,7 @@ export default function useListState<T>(initialValue: T[] = []) {
   return [
     state,
     {
+      setState,
       append,
       prepend,
       insert,
