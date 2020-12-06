@@ -4,6 +4,9 @@
   "exclude": ["dist"],
 
   "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "dist",
     "lib": ["es2016", "dom"],
     "jsx": "react",
     "esModuleInterop": true,

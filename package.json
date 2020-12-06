@@ -3,6 +3,7 @@
   "version": "1.1.2",
   "description": "General purpose react hooks",
   "main": "dist/lib.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/rtivital/xooks",
   "author": "Vitaly Rtishchev <rtivital@gmail.com>",
   "license": "MIT",
