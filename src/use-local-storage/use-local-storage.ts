@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-export default function useLocalStorage<T = any>({ key, delay }: { key: string; delay: number }) {
+export default function useLocalStorage<T>({ key, delay = 500 }: { key: string; delay?: number }) {
   const [saved, setSaved] = useState(true);
   const timeoutRef = useRef<number>();
 
@@ -8,7 +8,7 @@ export default function useLocalStorage<T = any>({ key, delay }: { key: string; 
     clearTimeout(timeoutRef.current);
   };
 
-  const save = (values: any) => {
+  const save = (values: T) => {
     cancel();
     timeoutRef.current = setTimeout(() => {
       try {
