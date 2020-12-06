@@ -18,6 +18,7 @@ yarn add xooks
 
 ## Included hooks
 
+- [use-color-scheme](#use-color-scheme)
 - [use-document-title](#use-document-title)
 - [use-clipboard](#use-clipboard)
 - [use-click-outside](#use-click-outside)
@@ -26,6 +27,27 @@ yarn add xooks
 - [use-local-storage](#use-local-storage)
 - [use-form](#use-form)
 - [use-intermediate-value](#use-intermediate-value)
+
+### use-color-scheme
+
+Returns current user color scheme, value is subscribed to system preferences, defaults to light.
+
+**Usage:**
+
+```jsx
+import React from 'react';
+import { useColorScheme } from 'xooks';
+
+export default function UseColorScheme() {
+  const scheme = useColorScheme(); // -> light | dark
+
+  if (scheme === 'dark') {
+    return <div>Dark</div>;
+  }
+
+  return <div>Light</div>;
+}
+```
 
 ### use-document-title
 

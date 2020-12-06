@@ -1,5 +1,6 @@
 export { default as useClickOutside } from './use-click-outside/use-click-outside';
 export { default as useClipboard } from './use-clipboard/use-clipboard';
+export { default as useColorScheme } from './use-color-scheme/use-color-scheme';
 export { default as useDocumentTitle } from './use-document-title/use-document-title';
 export { default as useId } from './use-id/use-id';
 export { default as useIntermediateValue } from './use-intermediate-value/use-intermediate-value';
