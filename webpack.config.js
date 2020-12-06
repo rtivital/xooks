@@ -8,7 +8,11 @@ module.exports = {
     minimizer: [new TerserJSPlugin({})],
   },
 
-  entry: './src/index.js',
+  entry: './src/index.ts',
+
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
 
   output: {
     library: 'xooks',
@@ -23,8 +27,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
       },
     ],
   },
