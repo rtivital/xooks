@@ -10,7 +10,7 @@ export default function useLocalStorage<T>({ key, delay = 500 }: { key: string; 
 
   const save = (values: T) => {
     cancel();
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       try {
         localStorage.setItem(key, JSON.stringify(values));
         setSaved(true);

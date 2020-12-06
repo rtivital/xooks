@@ -1,6 +1,5 @@
 module.exports = {
-  extends: ['airbnb-typescript', 'plugin:jest/recommended'],
-  plugins: ['jest'],
+  extends: ['airbnb-typescript'],
   parserOptions: {
     project: './tsconfig.json',
   },
@@ -8,13 +7,9 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    'jest/globals': true,
   },
 
   rules: {
-    // We do export
-    'jest/no-export': 'off',
-
     // some props require dangle
     'no-underscore-dangle': 'off',
 

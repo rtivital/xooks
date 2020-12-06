@@ -15,7 +15,6 @@
     "target": "es5",
     "sourceMap": true,
     "noEmitOnError": true,
-    "types": ["jest"],
     "baseUrl": "."
   }
 }
