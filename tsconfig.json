@@ -15,6 +15,7 @@
     "target": "es5",
     "sourceMap": true,
     "noEmitOnError": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./docs/types"]
   }
 }
