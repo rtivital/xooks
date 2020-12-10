@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const port = 9087;
 const entry = path.join(__dirname, 'src/index.tsx');
@@ -125,6 +126,9 @@ module.exports = {
     new HtmlWebpackPlugin({ templateContent, filename: '404.html' }),
     ...(production
       ? [new MiniCssExtractPlugin({ filename: 'lib.css' })]
-      : [new webpack.HotModuleReplacementPlugin()]),
+      : [
+          new webpack.HotModuleReplacementPlugin(),
+          new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
+        ]),
   ],
 };
