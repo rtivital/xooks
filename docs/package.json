@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
+    "@types/react-syntax-highlighter": "^13.5.0",
     "autoprefixer": "^10.0.4",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",
     "css-loader": "^5.0.1",
@@ -41,6 +42,9 @@
     "open-color": "^1.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-markdown": "^5.0.3",
+    "react-router-dom": "^5.2.0",
+    "react-syntax-highlighter": "^15.4.3",
+    "remark-gfm": "^1.0.0"
   }
 }
