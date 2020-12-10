@@ -3,7 +3,7 @@ import cx from 'clsx';
 import MD from 'react-markdown';
 import gfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import theme from 'react-syntax-highlighter/dist/esm/styles/prism/pojoaque';
+import theme from 'react-syntax-highlighter/dist/esm/styles/prism/duotone-light';
 import classes from './Markdown.styles.less';
 
 interface MarkdownProps {
