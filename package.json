@@ -1,6 +1,6 @@
 {
   "name": "xooks",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "General purpose react hooks",
   "main": "dist/lib.js",
   "types": "dist/index.d.ts",
