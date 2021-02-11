@@ -15,6 +15,7 @@ module.exports = {
   },
 
   output: {
+    globalObject: 'this',
     library: 'xooks',
     libraryTarget: 'umd',
     filename: 'lib.js',
