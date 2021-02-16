@@ -1,5 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 
+function attachMediaListener(query: MediaQueryList, callback: ({ matches: boolean }) => void) {
+  try {
+    query.addEventListener('change', callback);
+    return () => query.removeEventListener('change', callback);
+  } catch (e) {
+    query.addListener(callback);
+    return () => query.removeListener(callback);
+  }
+}
+
 export default function useColorScheme() {
   const media = useRef<MediaQueryList>();
   const [scheme, setScheme] = useState<'dark' | 'light'>(media.current.matches ? 'dark' : 'light');
@@ -8,8 +18,7 @@ export default function useColorScheme() {
 
   useEffect(() => {
     media.current = window.matchMedia('(prefers-color-scheme: dark)');
-    media.current.addEventListener('change', handleSchemeChange);
-    return () => media.current.removeEventListener('change', handleSchemeChange);
+    return attachMediaListener(media.current, handleSchemeChange);
   }, []);
 
   return scheme;
