@@ -18,6 +18,7 @@ export default function useColorScheme() {
 
   useEffect(() => {
     media.current = window.matchMedia('(prefers-color-scheme: dark)');
+    handleSchemeChange(media.current);
     return attachMediaListener(media.current, handleSchemeChange);
   }, []);
 
