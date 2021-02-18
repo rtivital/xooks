@@ -12,7 +12,7 @@ function attachMediaListener(query: MediaQueryList, callback: ({ matches: boolea
 
 export default function useColorScheme() {
   const media = useRef<MediaQueryList>();
-  const [scheme, setScheme] = useState<'dark' | 'light'>(media.current.matches ? 'dark' : 'light');
+  const [scheme, setScheme] = useState<'dark' | 'light'>('light');
   const handleSchemeChange = (query: { matches: boolean }) =>
     setScheme(query.matches ? 'dark' : 'light');
 
